@@ -65,6 +65,36 @@ public class Book {
     this.authors = authors;
   }
 
+  @Override
+  public int hashCode() {
+    return (id == null) ? 0 : id.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Book other = (Book) obj;
+    if (id == null) {
+      if (other.id != null)
+        return false;
+    } else if (!id.equals(other.id))
+      return false;
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "Book [" + (id != null ? "id=" + id + ", " : "")
+        + (title != null ? "title=" + title + ", " : "")
+        + (isbn != null ? "isbn=" + isbn + ", " : "")
+        + (publisher != null ? "publisher=" + publisher + ", " : "")
+        + (authors != null ? "authors=" + authors : "") + "]";
+  }
 
 
 }

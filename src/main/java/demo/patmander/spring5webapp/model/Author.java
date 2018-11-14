@@ -12,13 +12,13 @@ import javax.persistence.ManyToMany;
 public class Author {
 
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
   private String firstName;
   private String lastName;
 
-  @ManyToMany(mappedBy="authors")
+  @ManyToMany(mappedBy = "authors")
   private Set<Book> books = new HashSet<>();
 
   public Long getId() {
@@ -52,6 +52,38 @@ public class Author {
   public void setBooks(Set<Book> books) {
     this.books = books;
   }
+
+  @Override
+  public int hashCode() {
+    return id != null ? id.hashCode() : 0;
+
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if ((obj == null) || (getClass() != obj.getClass()))
+      return false;
+
+    Author other = (Author) obj;
+    if (id == null) {
+      if (other.id != null)
+        return false;
+    } else if (!id.equals(other.id))
+      return false;
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "Author [" + (id != null ? "id=" + id + ", " : "")
+        + (firstName != null ? "firstName=" + firstName + ", " : "")
+        + (lastName != null ? "lastName=" + lastName + ", " : "")
+        + (books != null ? "books=" + books : "") + "]";
+  }
+
+  
 
 
 }
